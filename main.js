@@ -10,34 +10,45 @@ const changeTemp = () => {
     if (cel.textContent === '°C') {
         cel.textContent = '°F';
         far.textContent = '°C';
+        p.textContent = '';
     } else {
         far.textContent = '°F';
         cel.textContent = '°C';
+        p.textContent = '';
     }
 }
 
-btnChan.addEventListener('click', changeTemp)
+const conFaran = () => {
+    let faran = 32 + 9 / 5 * input.value;
+    p.textContent = `${input.value} stopni celcujsza to ${faran.toFixed(1)} stopni faranjharta`
+    input.value = ''
+}
+
+const conCel = () => {
+    let celc = (input.value - 32) / 2;
+    p.textContent = `${input.value} stopni faranhajta to ${celc.toFixed(1)} stopni celcjusza`
+    input.value = ''
+}
 
 const convert = () => {
     if (input.value !== '') {
         if (cel.textContent === '°C') {
-            let faran = 32 + 9 / 5 * input.value;
-            console.log(`${input.value} stopni celcujsza to ${faran} stopni faranjharta`);
-            p.textContent = `${input.value} stopni celcujsza to ${faran} stopni faranjharta`
+            conFaran()
         } else {
-            let celc = (input.value - 32) / 2;
-            console.log(`${input.value} stopni faranhajta to ${celc} stopni faranjharta`);
-            p.textContent = `${input.value} stopni faranhajta to ${celc} stopni faranjharta`
+            conCel()
         }
+    } else {
+        p.textContent = 'Królu złoty, nic nie wpisałeś!'
+
     }
 }
-
-btnConv.addEventListener('click', convert)
 
 const resets = () => {
     p.textContent = '';
     input.value = '';
 }
 
+btnChan.addEventListener('click', changeTemp)
+btnConv.addEventListener('click', convert)
 btnRes.addEventListener('click', resets)
 
